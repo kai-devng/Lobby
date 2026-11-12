@@ -1,7 +1,7 @@
 {
   "name": "lobby-client",
   "productName": "Lobby",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Lobby - personal game launcher with friends, lobbies and relayed multiplayer",
   "author": "Lobby",

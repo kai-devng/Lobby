@@ -117,9 +117,36 @@
     $('l-server').value = S.serverUrl;
     $('l-server-label').textContent = S.serverUrl;
     $('l-conn').className = 'dot' + (S.connected ? ' on' : '');
-    if (!S.connected) $('l-server-details').open = true; // can't reach the server: show where to change it
-    setTimeout(() => $('l-user').focus(), 0);
+    // Not connected: instead of a dead login form, ask "hosting or joining?"
+    const offline = !S.connected && S.statusSeen;
+    $('l-offline').hidden = !offline;
+    $('l-creds').hidden = !S.connected;
+    $('l-connecting').hidden = S.connected || S.statusSeen;
+    if (S.connected) setTimeout(() => $('l-user').focus(), 0);
   }
+  const cleanErr = (e) => String(e?.message || e).replace(/^Error invoking remote method '[^']+': (Error: )?/, '');
+  $('l-host').onclick = async () => {
+    $('l-offline-error').textContent = '';
+    $('l-host').disabled = true; $('l-host').textContent = 'Starting server…';
+    try {
+      const st = await L.hosting.set({ enabled: true });
+      S.hosting = st;
+      if (st.error) $('l-offline-error').textContent = st.error;
+      else toast('Your server is running. Now create your account.', 'good', null, 6000);
+    } catch (e) { $('l-offline-error').textContent = cleanErr(e); }
+    $('l-host').disabled = false; $('l-host').textContent = 'Start a server on this PC';
+  };
+  const joinAddr = async () => {
+    $('l-offline-error').textContent = '';
+    try {
+      const r = await L.net.setServer($('l-join-addr').value);
+      S.serverUrl = r.serverUrl;
+      $('l-offline-error').textContent = 'Connecting…';
+      setTimeout(() => { if (!S.connected) $('l-offline-error').textContent = "Couldn't reach that address. Check it's the latest one your host sent, and that their Lobby is open."; }, 8000);
+    } catch (e) { $('l-offline-error').textContent = cleanErr(e); }
+  };
+  $('l-join').onclick = joinAddr;
+  $('l-join-addr').addEventListener('keydown', (e) => { if (e.key === 'Enter') joinAddr(); });
   async function doAuth(register) {
     const u = $('l-user').value.trim(), p = $('l-pass').value;
     $('l-error').textContent = '';
@@ -694,9 +721,11 @@
 
   L.net.onStatus((s) => {
     S.connected = s.connected;
+    S.statusSeen = true;
+    if (s.connected) $('l-offline-error').textContent = '';
     if (s.serverUrl) S.serverUrl = s.serverUrl;
     if (!s.connected) { if (S.lobby) toast('Lost connection to the Lobby server', 'error'); S.lobby = null; leaveArena(); }
-    if (S.user) renderAll(); else showLogin($('l-error').textContent);
+    if (S.user) renderAll(); else showLogin(s.connected ? '' : $('l-error').textContent);
   });
 
   L.net.onAuth((a) => {
@@ -762,6 +791,10 @@
     S.hosting = await L.hosting.state();
     S.tunnels = await L.tunnels.state();
     if (st.user) { S.user = st.user; setFriends(await L.net.req('friends.list').catch(() => null)); showApp(); }
-    else showLogin();
+    else {
+      showLogin();
+      // If no server answers quickly, stop saying "Connecting…" and offer host/join.
+      setTimeout(() => { if (!S.connected && !S.user) { S.statusSeen = true; showLogin($('l-error').textContent); } }, 2500);
+    }
   })();
 })();

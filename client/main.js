@@ -435,8 +435,9 @@ handle('hosting:set', async (o) => {
   saveSettings();
   if (h.enabled) {
     await startHosting();
-    // Point this app at the server it now hosts (if it isn't already).
-    if (hosting.server && !/^ws:\/\/(127\.0\.0\.1|localhost):/.test(settings.serverUrl)) setServerUrl(`ws://127.0.0.1:${h.port}`);
+    // Point this app at the server it now hosts, and reconnect right away (don't wait for retry backoff).
+    if (hosting.server && !conn.connected) setServerUrl(`ws://127.0.0.1:${h.port}`);
+    else if (hosting.server && !/^ws:\/\/(127\.0\.0\.1|localhost):/.test(settings.serverUrl)) setServerUrl(`ws://127.0.0.1:${h.port}`);
   } else {
     await stopHosting();
   }

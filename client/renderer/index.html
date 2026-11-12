@@ -13,11 +13,35 @@
     <div class="login-card">
       <div class="brand big"><span class="brand-mark"></span>LOBBY</div>
       <p class="muted">Your games. Your friends. No IPs shared.</p>
-      <label>Username <input id="l-user" autocomplete="username" maxlength="20" /></label>
-      <label>Password <input id="l-pass" type="password" autocomplete="current-password" maxlength="128" /></label>
-      <div class="row gap">
-        <button id="l-login" class="btn primary grow">Log in</button>
-        <button id="l-register" class="btn grow">Create account</button>
+
+      <!-- Shown when no server is reachable: pick hosting or joining -->
+      <div id="l-offline" class="offline-panel" hidden>
+        <p class="offline-title">You're not connected to a Lobby server yet.</p>
+        <div class="choice">
+          <b>Hosting for your group?</b>
+          <span class="muted small">Run the server on this PC. Your friends will connect to you.</span>
+          <button id="l-host" class="btn primary">Start a server on this PC</button>
+        </div>
+        <div class="choice">
+          <b>Joining a friend?</b>
+          <span class="muted small">Paste the address your host sent you (starts with wss://).</span>
+          <div class="row gap">
+            <input id="l-join-addr" class="grow" placeholder="wss://something.trycloudflare.com" spellcheck="false" />
+            <button id="l-join" class="btn">Connect</button>
+          </div>
+        </div>
+        <p id="l-offline-error" class="error"></p>
+      </div>
+      <p id="l-connecting" class="muted small center" hidden>Connecting…</p>
+
+      <div id="l-creds" class="col gap">
+        <label>Username <input id="l-user" autocomplete="username" maxlength="20" /></label>
+        <label>Password <input id="l-pass" type="password" autocomplete="current-password" maxlength="128" /></label>
+        <div class="row gap">
+          <button id="l-login" class="btn primary grow">Log in</button>
+          <button id="l-register" class="btn grow">Create account</button>
+        </div>
+        <p class="muted small">New here? Pick a username and password, then click <b>Create account</b>.</p>
       </div>
       <p id="l-error" class="error"></p>
       <details id="l-server-details" class="server-details">

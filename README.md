@@ -57,14 +57,14 @@ Requirements: Windows 10 or 11, 64-bit.
 
 Pick **one** person in the group to host. Their PC needs to be on, with Lobby open, while people play.
 
-1. Open Lobby. On the login screen, click **Create account** to make your account.
-2. Go to **Settings**, then **Host a Lobby server on this PC**, and turn on **Run the server while Lobby is open**.
+1. Open Lobby. The login screen asks whether you're hosting or joining. Click **Start a server on this PC**.
+2. Type a username and password, then click **Create account**.
 3. To let friends connect **over the internet**:
    1. Install Cloudflare's free tunnel tool once. Open PowerShell and run:
       ```powershell
       winget install --id Cloudflare.cloudflared
       ```
-   2. Restart Lobby, go back to **Settings**, and click **Share over the internet**.
+   2. Restart Lobby, go to **Settings**, and click **Share over the internet**.
    3. Lobby shows an address like `wss://something-random.trycloudflare.com`. Click **Copy** and send it to
       your friends.
 
@@ -80,9 +80,8 @@ Pick **one** person in the group to host. Their PC needs to be on, with Lobby op
 ### 3. Everyone else joins
 
 1. Install Lobby and open it.
-2. On the login screen, open **Server**, paste the address the host sent you, and click **Connect**. The dot
-   turns green when you're connected.
-3. Click **Create account**, choosing a username and a password (8+ characters).
+2. On the login screen, under **Joining a friend?**, paste the address the host sent you and click **Connect**.
+3. Type a username and password, then click **Create account**, choosing a username and a password (8+ characters).
 4. Go to **Hub**, type the host's username under **Add friend**, and click **Add**. Once they accept,
    you're friends.
 
@@ -226,7 +225,7 @@ LOBBY/
 
 | Problem | Fix |
 |---|---|
-| Login screen says it can't connect (grey dot) | Check the server address under **Server**. Is the host's Lobby open with the server on? Shared tunnel addresses change every session, so ask the host for the current one. |
+| "Not connected to the Lobby server" | Hosts: click **Start a server on this PC** on the login screen. Friends: paste the host's latest address under **Joining a friend?**. Is the host's Lobby open with the server on? Shared tunnel addresses change every session, so ask the host for the current one. |
 | "Port 47420 is already in use" when hosting | Another Lobby server is already running on this PC (for example `Start Lobby.bat`). Close it, or just connect to that one. |
 | "Share over the internet" button is missing | Install cloudflared (`winget install --id Cloudflare.cloudflared`), then restart Lobby. |
 | Friend's game can't find my server in its "LAN games" list | LAN *discovery* doesn't go through the relay. Use the game's **Join by IP** with the `127.0.0.1:port` address Lobby shows. |

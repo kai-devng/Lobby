@@ -1,4 +1,4 @@
-# Lobby v0.2.0
+# Lobby v0.2.1
 
 A personal game launcher for you and your friends: your `.exe` games in one library, a friends list,
 lobbies with invites and chat, and multiplayer that **never shares anyone's IP address** with other players.
@@ -7,8 +7,8 @@ lobbies with invites and chat, and multiplayer that **never shares anyone's IP a
 
 | File | What it is |
 |---|---|
-| `Lobby-Setup-0.2.0.exe` | **Installer (recommended).** Run it. It adds Start-menu and desktop shortcuts. |
-| `Lobby-0.2.0-win-x64.zip` | **Portable.** Unzip anywhere and run `Lobby.exe`. |
+| `Lobby-Setup-0.2.1.exe` | **Installer (recommended).** Run it. It adds Start-menu and desktop shortcuts. |
+| `Lobby-0.2.1-win-x64.zip` | **Portable.** Unzip anywhere and run `Lobby.exe`. |
 | `Tap-Race-example-game.zip` | Example Lobby Certified game. Add it in Lobby with **Library**, **+**, **Add .zip package**. |
 | `LOBBY-DEV-INSTRUCTIONS.md` | Give this to any AI or developer to build a Lobby Certified game. |
 
@@ -18,19 +18,21 @@ lobbies with invites and chat, and multiplayer that **never shares anyone's IP a
 ## Getting started
 
 **The host (one person in the group):**
-1. Open Lobby, then **Settings**, and turn on **Run the server while Lobby is open**.
-2. Under **Play with friends over the internet**, install Cloudflare's tunnel once
-   (`winget install --id Cloudflare.cloudflared`), restart Lobby, and click **Share over the internet**.
-3. Send friends the `wss://…trycloudflare.com` address it shows. It changes each time you start sharing.
-4. Create your account on the login screen.
+1. Install Cloudflare's tunnel tool once: open PowerShell and run `winget install --id Cloudflare.cloudflared`.
+2. Open Lobby. On the login screen, click **Start a server on this PC**, then create your account.
+3. Go to **Settings** and click **Share over the internet**.
+4. Click **Copy** and send friends the `wss://…trycloudflare.com` address. It changes each time you start sharing.
 
 **Friends:**
 1. Install Lobby.
-2. On the login screen, open **Server**, paste the host's `wss://` address, and click **Connect**.
+2. On the login screen, under **Joining a friend?**, paste the host's `wss://` address and click **Connect**.
 3. Create an account, add the host as a friend (in **Hub**), and you're in.
 
 **LAN party:** the host also turns on **Allow LAN connections**. People on the same network use the
 `ws://192.168.x.x:47420` address shown in Settings.
+
+## What's new in 0.2.1
+- Fixed: the host could get stuck on "Not connected to the Lobby server". The login screen now has **Start a server on this PC** and **Joining a friend?** options.
 
 ## What's in this version
 - Library for any `.exe` (add or scan folders), play time, launch options, favorites, and a mods folder per game
@@ -50,5 +52,5 @@ lobbies with invites and chat, and multiplayer that **never shares anyone's IP a
   With a Cloudflare tunnel, the host's own IP stays hidden too.
 
 ## Uploading this to GitHub
-GitHub won't accept files over 100 MB inside a repository. Upload `Lobby-Setup-0.2.0.exe` and the `.zip` as
+GitHub won't accept files over 100 MB inside a repository. Upload `Lobby-Setup-0.2.1.exe` and the `.zip` as
 **Release assets** instead: Repository, then **Releases**, then **Draft a new release**, then drag the files in.
