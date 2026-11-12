@@ -1,0 +1,14 @@
+{
+  "lobbyApi": 1,
+  "id": "blast-arena",
+  "name": "Blast Arena",
+  "version": "1.1.0",
+  "author": "Lobby",
+  "description": "Top-down arena shooter. First to 15 blasts wins.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "minPlayers": 1,
+  "maxPlayers": 8,
+  "solo": true,
+  "window": { "width": 1280, "height": 760 }
+}

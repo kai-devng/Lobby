@@ -1,0 +1,52 @@
+{
+  "name": "lobby-client",
+  "productName": "Lobby",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Lobby - personal game launcher with friends, lobbies and relayed multiplayer",
+  "author": "Lobby",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:alt": "electron . --profile=alt",
+    "dist": "electron-builder --win --x64"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.18.0"
+  },
+  "allowScripts": {
+    "electron@38.8.6": true
+  },
+  "build": {
+    "appId": "app.lobby.launcher",
+    "productName": "Lobby",
+    "copyright": "Lobby",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": [
+      "main.js", "preload.js", "game-preload.js", "package.json",
+      "src/**/*", "renderer/**/*", "certified/**/*", "build/icon.png", "lobby.config.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "zip", "arch": ["x64"] }
+      ],
+      "icon": "build/icon.png",
+      "artifactName": "Lobby-${version}-win-x64.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Lobby",
+      "artifactName": "Lobby-Setup-${version}.exe"
+    }
+  }
+}

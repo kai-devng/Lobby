@@ -1,0 +1,13 @@
+{
+  "lobbyApi": 1,
+  "id": "tap-race",
+  "name": "Tap Race",
+  "version": "1.0.0",
+  "author": "Lobby examples",
+  "description": "Mash Space to race your friends to the finish. A tiny example of a Lobby Certified game.",
+  "entry": "index.html",
+  "minPlayers": 1,
+  "maxPlayers": 8,
+  "solo": true,
+  "window": { "width": 900, "height": 600 }
+}

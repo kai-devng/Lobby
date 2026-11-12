@@ -1,0 +1,8 @@
+node_modules/
+server/data/
+client/dist/
+client/lobby.config.json
+*.log
+# Installers/zips are too big for a repo: upload them as GitHub Release assets
+GITHUB/*.exe
+GITHUB/*.zip
