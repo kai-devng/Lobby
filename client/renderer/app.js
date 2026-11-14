@@ -15,7 +15,7 @@
       else if (k === 'checked') el.checked = !!v;
       else el.setAttribute(k, v === true ? '' : v);
     }
-    for (const kid of kids.flat()) {
+    for (const kid of kids.flat(Infinity)) {
       if (kid === null || kid === undefined || kid === false) continue;
       el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
     }
@@ -138,6 +138,10 @@
   };
   const joinAddr = async () => {
     $('l-offline-error').textContent = '';
+    if (/^\s*wss?:\/\/(127\.0\.0\.1|localhost|\[?::1\]?)([:/]|\s*$)/i.test($('l-join-addr').value)) {
+      $('l-offline-error').textContent = "That address (127.0.0.1) only works on the host's own PC. Ask your host for the wss://….trycloudflare.com address from their Settings → Share over the internet.";
+      return;
+    }
     try {
       const r = await L.net.setServer($('l-join-addr').value);
       S.serverUrl = r.serverUrl;

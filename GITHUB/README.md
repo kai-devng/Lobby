@@ -1,4 +1,4 @@
-# Lobby v0.2.1
+# Lobby v0.2.2
 
 A personal game launcher for you and your friends: your `.exe` games in one library, a friends list,
 lobbies with invites and chat, and multiplayer that **never shares anyone's IP address** with other players.
@@ -7,8 +7,8 @@ lobbies with invites and chat, and multiplayer that **never shares anyone's IP a
 
 | File | What it is |
 |---|---|
-| `Lobby-Setup-0.2.1.exe` | **Installer (recommended).** Run it. It adds Start-menu and desktop shortcuts. |
-| `Lobby-0.2.1-win-x64.zip` | **Portable.** Unzip anywhere and run `Lobby.exe`. |
+| `Lobby-Setup-0.2.2.exe` | **Installer (recommended).** Run it. It adds Start-menu and desktop shortcuts. |
+| `Lobby-0.2.2-win-x64.zip` | **Portable.** Unzip anywhere and run `Lobby.exe`. |
 | `Tap-Race-example-game.zip` | Example Lobby Certified game. Add it in Lobby with **Library**, **+**, **Add .zip package**. |
 | `LOBBY-DEV-INSTRUCTIONS.md` | Give this to any AI or developer to build a Lobby Certified game. |
 
@@ -31,6 +31,10 @@ lobbies with invites and chat, and multiplayer that **never shares anyone's IP a
 **LAN party:** the host also turns on **Allow LAN connections**. People on the same network use the
 `ws://192.168.x.x:47420` address shown in Settings.
 
+## What's new in 0.2.2
+- Fixed: after clicking **Share over the internet**, the address showed as `[object HTMLSpanElement]…` instead of the copyable `wss://` link.
+- Friends who paste a `127.0.0.1` address now get told to ask the host for the `wss://` one instead.
+
 ## What's new in 0.2.1
 - Fixed: the host could get stuck on "Not connected to the Lobby server". The login screen now has **Start a server on this PC** and **Joining a friend?** options.
 
@@ -52,5 +56,5 @@ lobbies with invites and chat, and multiplayer that **never shares anyone's IP a
   With a Cloudflare tunnel, the host's own IP stays hidden too.
 
 ## Uploading this to GitHub
-GitHub won't accept files over 100 MB inside a repository. Upload `Lobby-Setup-0.2.1.exe` and the `.zip` as
+GitHub won't accept files over 100 MB inside a repository. Upload `Lobby-Setup-0.2.2.exe` and the `.zip` as
 **Release assets** instead: Repository, then **Releases**, then **Draft a new release**, then drag the files in.
